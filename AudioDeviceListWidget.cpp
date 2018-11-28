@@ -1,5 +1,6 @@
 #include "AudioDeviceListWidget.h"
 #include "ui_AudioDeviceListWidget.h"
+
 #include <QAudio>
 #include <QDebug>
 
@@ -19,11 +20,21 @@ AudioDeviceListWidget::~AudioDeviceListWidget()
 
 void AudioDeviceListWidget::initDeviceList()
 {
+    // get default device:
+	const QAudioDeviceInfo &defaultDeviceInfo = QAudioDeviceInfo::defaultInputDevice();
+
+    // get available device list
     *(this->audio_dev_list) = QAudioDeviceInfo::availableDevices( QAudio::AudioInput);
+
+    // set default device:
+    this->ui->combo_devlist->addItem( defaultDeviceInfo.deviceName() );
+
+    // add device list to combo box
     for(AudioDeviceList::iterator it = this->audio_dev_list->begin();
         it != this->audio_dev_list->end(); ++it)
     {
-        this->ui->combo_devlist->addItem( it->deviceName());
+        if( *it != defaultDeviceInfo)
+	        this->ui->combo_devlist->addItem( it->deviceName());
     }
 }
 

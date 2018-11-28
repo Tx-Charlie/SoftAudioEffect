@@ -19,7 +19,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::connectSignalSlot()
 {
-
     connect( this->ui->audio_devlist_widget, SIGNAL(signal_audioDeviceInfo(QAudioDeviceInfo)),
              this->audio_device, SLOT(slot_setDeviceInfo(QAudioDeviceInfo)));
 
@@ -34,12 +33,18 @@ void MainWindow::connectSignalSlot()
 
 void MainWindow::on_button_start_clicked()
 {
+    /* set audio format */
     this->audio_player->setFormat( this->ui->audio_format_widget->getAudioFormat());
     this->audio_device->setFormat( this->ui->audio_format_widget->getAudioFormat());
+
+    /* set device info */
     this->audio_device->setDeviceInfo( this->ui->audio_devlist_widget->getCurrentDeviceInfo());
 
+    /* start playing */
     this->audio_player->startPlay();
     this->audio_device->start();
+
+    /* connect audio source to audio sink */
     connect( this->audio_device, SIGNAL(signal_audioData(QByteArray)),
              this->audio_player, SLOT(slot_playBuffer(QByteArray)),
 			 Qt::DirectConnection);

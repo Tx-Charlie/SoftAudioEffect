@@ -15,7 +15,11 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="1">
-    <widget class="QComboBox" name="combo_devlist"/>
+    <widget class="QComboBox" name="combo_devlist">
+     <property name="maxVisibleItems">
+      <number>16</number>
+     </property>
+    </widget>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label_devices">
