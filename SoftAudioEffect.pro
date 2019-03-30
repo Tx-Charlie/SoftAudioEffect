@@ -6,7 +6,9 @@ QT += core multimedia widgets
 
 TEMPLATE = app
 TARGET = SoftAudioEffect
+
 INCLUDEPATH += .
+INCLUDEPATH += ./include
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
@@ -20,19 +22,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += AudioDevice.h \
-	AudioPlayer.h \
-	MainWindow.h \
-	AudioDeviceListWidget.h \
-	AudioFormatListWidget.h
-SOURCES += AudioDevice.cpp \
-	AudioPlayer.cpp \
-	Main.cpp \
-	MainWindow.cpp \
-	AudioDeviceListWidget.cpp \
-	AudioFormatListWidget.cpp
+HEADERS += \
+	include/AudioDevice.h \
+	include/AudioPlayer.h \
+	include/MainWindow.h \
+	include/AudioDeviceListWidget.h \
+	include/AudioFormatListWidget.h
+SOURCES += \
+	src/Main.cpp \
+	src/AudioDevice.cpp \
+	src/AudioPlayer.cpp \
+	src/MainWindow.cpp \
+	src/AudioDeviceListWidget.cpp \
+	src/AudioFormatListWidget.cpp
 
 FORMS += \
-    AudioDeviceListWidget.ui \
-    MainWindow.ui \
-    AudioFormatListWidget.ui
+    forms/AudioDeviceListWidget.ui \
+    forms/MainWindow.ui \
+    forms/AudioFormatListWidget.ui
