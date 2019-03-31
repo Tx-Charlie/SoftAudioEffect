@@ -25,8 +25,9 @@ void AudioDevice::start()
 
     if( this->audio_input_io)
     {
-        connect( this->audio_input_io, SIGNAL(readyRead()),
-                 this, SLOT(slot_receiveAudioData()));
+		connect( this->audio_input_io, &QIODevice::readyRead,
+				 this, &AudioDevice::slot_receiveAudioData,
+				 Qt::DirectConnection);
     }
 }
 
@@ -35,9 +36,9 @@ void AudioDevice::stop()
     this->audio_input->stop();
     if( this->audio_input_io )
     {
-        disconnect( this->audio_input_io, SIGNAL(readyRead()),
-                    this, SLOT(slot_receiveAudioData()));
-    }
+		disconnect( this->audio_input_io, &QIODevice::readyRead,
+				 this, &AudioDevice::slot_receiveAudioData);
+	}
 }
 
 void AudioDevice::slot_receiveAudioData()

@@ -5,17 +5,38 @@ MainWindow::MainWindow( QWidget *parent ) : QWidget(parent),
 	ui( new Ui::MainWindow),
 	flag_device_work_started(false),
 	audio_device( new AudioDevice),
-	audio_player( new AudioPlayer)
+	audio_device_thread( new QThread()),
+	audio_player( new AudioPlayer),
+	audio_player_thread( new QThread() )
 {
 	ui->setupUi( this );
+	this->init();
 	this->connectSignalSlot();
 }
 
 MainWindow::~MainWindow()
 {
 	delete this->ui;
+
+	if(this->audio_device_thread->isRunning())
+		this->audio_device_thread->exit();
+	this->audio_device_thread->deleteLater();
+
+	if(this->audio_player_thread->isRunning())
+		this->audio_player_thread->terminate();
+	this->audio_player_thread->deleteLater();
+
 	delete this->audio_device;
 	delete this->audio_player;
+
+}
+
+void MainWindow::init()
+{
+	this->audio_device->moveToThread( this->audio_device_thread );
+	//this->audio_player->moveToThread( this->audio_player_thread );
+	this->audio_device_thread->start();
+	//this->audio_player_thread->start();
 }
 
 void MainWindow::connectSignalSlot()
@@ -42,7 +63,7 @@ void MainWindow::on_button_start_clicked()
 	/* connect audio source to audio sink */
 	connect( this->audio_device, &AudioDevice::signal_audioData,
 			 this->audio_player, &AudioPlayer::slot_playBuffer,
-			 Qt::DirectConnection);
+			 Qt::QueuedConnection);
 }
 
 //-------------------------------------------------------------------------------

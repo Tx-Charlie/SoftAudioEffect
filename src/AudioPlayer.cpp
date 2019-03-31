@@ -1,4 +1,5 @@
 #include "AudioPlayer.h"
+#include <algorithm>
 #include <QDebug>
 
 AudioPlayer::AudioPlayer(QObject *parent) : QObject(parent),
@@ -29,12 +30,14 @@ void AudioPlayer::playBuffer( QByteArray data)
 {
 	if( this->audio_player)
 	{
-        QByteArray data_sp;
+		/*
+		QByteArray data_sp;
+		data_sp.resize( data.size());
+		std::copy( data.begin(), data.end(), data_sp.begin());
 
         for( int i = 0; i < data.size(); i += 4)
         {
             // big endian
-            /*
             int sum = 0;
             qint16 val;
             for(int j = 0; j < 2; j += 2)
@@ -55,15 +58,16 @@ void AudioPlayer::playBuffer( QByteArray data)
             data_sp.push_back( val_low);
             data_sp.push_back( val_high);
             data_sp.push_back( val_low);
-            */
 
             data_sp.push_back( data[i]);
             data_sp.push_back( data[i + 1]);
             data_sp.push_back( data[i]);
             data_sp.push_back( data[i + 1]);
         }
+		*/
 
-        this->audio_player->write( data_sp );
+		//this->audio_player->write( data_sp );
+		this->audio_player->write( data );
 	}
 }
 
