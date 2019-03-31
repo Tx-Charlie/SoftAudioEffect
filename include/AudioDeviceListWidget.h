@@ -8,30 +8,31 @@
 
 typedef QList<QAudioDeviceInfo> AudioDeviceList;
 
-namespace  Ui {
+namespace  Ui
+{
 class AudioDeviceListWidget;
 }
 
 class AudioDeviceListWidget : public QWidget
 {
 	Q_OBJECT
-    signals:
-        void signal_audioDeviceInfo( QAudioDeviceInfo dev_info);
-	public:
-		explicit AudioDeviceListWidget( QWidget *parent = NULL);
-		~AudioDeviceListWidget();
+signals:
+	void signal_audioDeviceInfo( QAudioDeviceInfo dev_info);
+public:
+	explicit AudioDeviceListWidget( QWidget *parent = nullptr);
+	~AudioDeviceListWidget();
 
-		void initDeviceList();
+	void initDeviceList();
 
-		QAudioDeviceInfo getInputAudioDeviceInfo( const int &index);
-        QAudioDeviceInfo getCurrentDeviceInfo();
+	QAudioDeviceInfo getInputAudioDeviceInfo( const int &index);
+	QAudioDeviceInfo getCurrentDeviceInfo();
 
 private slots:
-        void on_combo_devlist_currentIndexChanged(int index);
+	void on_combo_devlist_currentIndexChanged(int index);
 
 private:
-        Ui::AudioDeviceListWidget *ui;
-        AudioDeviceList *audio_dev_list; //audio device list
+	Ui::AudioDeviceListWidget *ui;
+	AudioDeviceList *audio_dev_list; //audio device list
 };
 
 #endif

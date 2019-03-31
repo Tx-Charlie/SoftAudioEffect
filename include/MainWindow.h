@@ -17,13 +17,19 @@ Q_OBJECT
 	explicit MainWindow( QWidget *parent = nullptr);
 	~MainWindow();
 
+	void startDevice();
+	void stopDevice();
+
 private slots:
     void on_button_start_clicked();
+
+	void slot_deviceOptionApply( QAudioDeviceInfo dev_info, QAudioFormat audio_fmt);
 
 private:
         void connectSignalSlot();
         Ui::MainWindow *ui;
 
+		bool flag_device_work_started;
 		AudioDevice *audio_device;
 		AudioPlayer *audio_player;
 };

@@ -18,11 +18,13 @@ QAudioFormat AudioFormatListWidget::getAudioFormat()
     return this->audio_format;
 }
 
+/*
 void AudioFormatListWidget::on_button_apply_clicked()
 {
-    this->applyFormat();
+	this->applyFormat();
     emit signal_audioFormat( this->audio_format );
 }
+*/
 
 
 void AudioFormatListWidget::applyFormat()

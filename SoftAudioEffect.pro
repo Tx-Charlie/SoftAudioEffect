@@ -27,16 +27,19 @@ HEADERS += \
 	include/AudioPlayer.h \
 	include/MainWindow.h \
 	include/AudioDeviceListWidget.h \
-	include/AudioFormatListWidget.h
+	include/AudioFormatListWidget.h \
+    include/DeviceOptionDialog.h
 SOURCES += \
 	src/Main.cpp \
 	src/AudioDevice.cpp \
 	src/AudioPlayer.cpp \
 	src/MainWindow.cpp \
 	src/AudioDeviceListWidget.cpp \
-	src/AudioFormatListWidget.cpp
+	src/AudioFormatListWidget.cpp \
+    src/DeviceOptionDialog.cpp
 
 FORMS += \
     forms/AudioDeviceListWidget.ui \
     forms/MainWindow.ui \
-    forms/AudioFormatListWidget.ui
+    forms/AudioFormatListWidget.ui \
+    forms/DeviceOptionDialog.ui
