@@ -27,7 +27,9 @@ void AudioDevice::start()
     {
 		connect( this->audio_input_io, &QIODevice::readyRead,
 				 this, &AudioDevice::slot_receiveAudioData,
-				 Qt::DirectConnection);
+				 Qt::QueuedConnection);
+
+				 //Qt::DirectConnection);
     }
 }
 

@@ -33,6 +33,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
+    this->audio_device_thread->setPriority(QThread::TimeCriticalPriority);
 	this->audio_device->moveToThread( this->audio_device_thread );
 	//this->audio_player->moveToThread( this->audio_player_thread );
 	this->audio_device_thread->start();
@@ -82,7 +83,8 @@ void MainWindow::startDevice()
 	{
 		connect( this->audio_device, &AudioDevice::signal_audioData,
 				 this->audio_player, &AudioPlayer::slot_playBuffer,
-				 Qt::DirectConnection);
+			 	 Qt::QueuedConnection);
+				 //Qt::DirectConnection);
 
 		this->audio_player->startPlay();
 		this->audio_device->start();
